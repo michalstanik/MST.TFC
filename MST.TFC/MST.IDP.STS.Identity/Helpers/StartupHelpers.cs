@@ -25,6 +25,8 @@ using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
 using MST.IDP.Admin.EntityFramework.Shared.Configuration;
 using MST.IDP.Admin.EntityFramework.SqlServer.Extensions;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Helpers;
+using MST.IDP.Admin.EntityFramework.Shared.RepositoriesInterfaces;
+using MST.IDP.Admin.EntityFramework.Shared.Repositories;
 
 namespace MST.IDP.STS.Identity.Helpers
 {
@@ -96,6 +98,15 @@ namespace MST.IDP.STS.Identity.Helpers
 
             app.UseHsts(options => options.MaxAge(days: 365));
             app.UseReferrerPolicy(options => options.NoReferrer());
+        }
+
+        /// <summary>
+        /// Register all data repositories
+        /// </summary>
+        /// <param name="services"></param>
+        public static void RegisterRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IUserIdentityRepository, UserIdentityRepository>();
         }
 
         /// <summary>

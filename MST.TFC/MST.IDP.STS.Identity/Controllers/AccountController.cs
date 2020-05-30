@@ -5,6 +5,7 @@
 // Modified by Jan Škoruba
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
@@ -21,6 +22,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using MST.IDP.Admin.EntityFramework.Shared.RepositoriesInterfaces;
 using MST.IDP.STS.Identity.Configuration;
 using MST.IDP.STS.Identity.Helpers;
 using MST.IDP.STS.Identity.Helpers.Localization;
@@ -45,6 +47,7 @@ namespace MST.IDP.STS.Identity.Controllers
         private readonly IGenericControllerLocalizer<AccountController<TUser, TKey>> _localizer;
         private readonly LoginConfiguration _loginConfiguration;
         private readonly RegisterConfiguration _registerConfiguration;
+        private readonly IUserIdentityRepository _userIdentityRepository;
 
         public AccountController(
             UserResolver<TUser> userResolver,
@@ -57,7 +60,8 @@ namespace MST.IDP.STS.Identity.Controllers
             IEmailSender emailSender,
             IGenericControllerLocalizer<AccountController<TUser, TKey>> localizer,
             LoginConfiguration loginConfiguration,
-            RegisterConfiguration registerConfiguration)
+            RegisterConfiguration registerConfiguration,
+            IUserIdentityRepository userIdentityRepository)
         {
             _userResolver = userResolver;
             _userManager = userManager;
@@ -70,6 +74,7 @@ namespace MST.IDP.STS.Identity.Controllers
             _localizer = localizer;
             _loginConfiguration = loginConfiguration;
             _registerConfiguration = registerConfiguration;
+            _userIdentityRepository = userIdentityRepository;
         }
 
         /// <summary>
@@ -132,6 +137,12 @@ namespace MST.IDP.STS.Identity.Controllers
                 var user = await _userResolver.GetUserAsync(model.Username);
                 if (user != default(TUser))
                 {
+                    if(await _userIdentityRepository.PasswordChangeIsForced(user.Id.ToString()))
+                    {
+                        Debug.WriteLine("Password Should Be Changed");
+                        //return View("ResetPassword");
+                    }
+
                     var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberLogin, lockoutOnFailure: true);
                     if (result.Succeeded)
                     {

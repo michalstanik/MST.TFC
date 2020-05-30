@@ -36,6 +36,9 @@ namespace MST.IDP.STS.Identity
             // Add email senders which is currently setup for SendGrid and SMTP
             services.AddEmailSenders(Configuration);
 
+            //Register Repositories
+            services.RegisterRepositories();
+
             // Add services for authentication, including Identity model and external providers
             RegisterAuthentication(services);
             
@@ -75,6 +78,11 @@ namespace MST.IDP.STS.Identity
                 });
             });
         }
+
+        //public  void RegisterRepositories(IServiceCollection services)
+        //{
+        //    services.RegisterRepositories(services);
+        //}
 
         public virtual void RegisterDbContexts(IServiceCollection services)
         {
