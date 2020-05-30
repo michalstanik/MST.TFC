@@ -50,7 +50,10 @@ namespace MST.IDP.Admin.Helpers
             {
                 using (var context = scope.ServiceProvider.GetRequiredService<TPersistedGrantDbContext>())
                 {
-                    await context.Database.EnsureDeletedAsync();
+                    if (Startup.StaticConfig.AdminConfiguration.DatabaseDropOnSeed)
+                    {
+                        await context.Database.EnsureDeletedAsync();
+                    }
                     await context.Database.MigrateAsync();
                 }
 
