@@ -10,6 +10,7 @@
         "Username": "admin",
         "Password": "Pa$$word123",
         "Email": "admin@gmail.com",
+        "ForcedPasswordChange": true,
         "Roles": [
           "mstAdmin"
         ],

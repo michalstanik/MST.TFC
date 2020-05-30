@@ -4,7 +4,7 @@ namespace MST.IDP.Admin.EntityFramework.Shared.Entities.Identity
 {
 	public class UserIdentity : IdentityUser
 	{
-		
+		public bool ForcedPasswordChange { get; set; }
 	}
 }
 
