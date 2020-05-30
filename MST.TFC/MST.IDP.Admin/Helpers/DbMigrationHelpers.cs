@@ -12,6 +12,7 @@ using Skoruba.AuditLogging.EntityFramework.Entities;
 using MST.IDP.Admin.Configuration;
 using MST.IDP.Admin.Configuration.Interfaces;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
+using MST.IDP.Admin.EntityFramework.Shared.Entities.Identity;
 
 namespace MST.IDP.Admin.Helpers
 {
@@ -28,7 +29,7 @@ namespace MST.IDP.Admin.Helpers
             where TPersistedGrantDbContext : DbContext, IAdminPersistedGrantDbContext
             where TLogDbContext : DbContext, IAdminLogDbContext
             where TAuditLogDbContext: DbContext, IAuditLoggingDbContext<AuditLog>
-            where TUser : IdentityUser, new()
+            where TUser : UserIdentity, new()
             where TRole : IdentityRole, new()
         {
             using (var serviceScope = host.Services.CreateScope())
@@ -81,7 +82,7 @@ namespace MST.IDP.Admin.Helpers
 
         public static async Task EnsureSeedData<TIdentityServerDbContext, TUser, TRole>(IServiceProvider serviceProvider)
         where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
-        where TUser : IdentityUser, new()
+        where TUser : UserIdentity, new()
         where TRole : IdentityRole, new()
         {
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -101,7 +102,7 @@ namespace MST.IDP.Admin.Helpers
         /// </summary>
         private static async Task EnsureSeedIdentityData<TUser, TRole>(UserManager<TUser> userManager,
             RoleManager<TRole> roleManager, IdentityDataConfiguration identityDataConfiguration)
-            where TUser : IdentityUser, new()
+            where TUser : UserIdentity, new()
             where TRole : IdentityRole, new()
         {
             if (!await roleManager.Roles.AnyAsync())
@@ -138,7 +139,8 @@ namespace MST.IDP.Admin.Helpers
                     {
                         UserName = user.Username,
                         Email = user.Email,
-                        EmailConfirmed = true
+                        EmailConfirmed = true,
+                        ForcedPasswordChange = user.ForcedPasswordChange
                     };
 
                     // if there is no password we create user without password
