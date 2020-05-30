@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MST.IDP", "MST.IDP", "{DC05A4D2-62AF-4917-9389-8CFE1AC72377}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MST.IDP.Admin", "MST.IDP.Admin\MST.IDP.Admin.csproj", "{45AE223D-BD26-4648-8C7E-EDBB05C3E93E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MST.IDP.Admin.Api", "MST.IDP.Admin.Api\MST.IDP.Admin.Api.csproj", "{A11DE6AA-20F5-408E-97A9-512C1626F418}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MST.IDP.Admin.EntityFramework.Shared", "MST.IDP.Admin.EntityFramework.Shared\MST.IDP.Admin.EntityFramework.Shared.csproj", "{FC3A81C8-A709-4E36-AE47-E328AD52E15D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MST.IDP.Admin.EntityFramework.SqlServer", "MST.IDP.Admin.EntityFramework.SqlServer\MST.IDP.Admin.EntityFramework.SqlServer.csproj", "{D73D4591-A1C9-4809-A392-2EB26F3C7DCE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MST.IDP.STS.Identity", "MST.IDP.STS.Identity\MST.IDP.STS.Identity.csproj", "{938EB40F-0702-45E0-A575-55F20C0FF444}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45AE223D-BD26-4648-8C7E-EDBB05C3E93E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45AE223D-BD26-4648-8C7E-EDBB05C3E93E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45AE223D-BD26-4648-8C7E-EDBB05C3E93E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45AE223D-BD26-4648-8C7E-EDBB05C3E93E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A11DE6AA-20F5-408E-97A9-512C1626F418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A11DE6AA-20F5-408E-97A9-512C1626F418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A11DE6AA-20F5-408E-97A9-512C1626F418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A11DE6AA-20F5-408E-97A9-512C1626F418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC3A81C8-A709-4E36-AE47-E328AD52E15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC3A81C8-A709-4E36-AE47-E328AD52E15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC3A81C8-A709-4E36-AE47-E328AD52E15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC3A81C8-A709-4E36-AE47-E328AD52E15D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73D4591-A1C9-4809-A392-2EB26F3C7DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73D4591-A1C9-4809-A392-2EB26F3C7DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73D4591-A1C9-4809-A392-2EB26F3C7DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73D4591-A1C9-4809-A392-2EB26F3C7DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{938EB40F-0702-45E0-A575-55F20C0FF444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{938EB40F-0702-45E0-A575-55F20C0FF444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{938EB40F-0702-45E0-A575-55F20C0FF444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{938EB40F-0702-45E0-A575-55F20C0FF444}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{45AE223D-BD26-4648-8C7E-EDBB05C3E93E} = {DC05A4D2-62AF-4917-9389-8CFE1AC72377}
+		{A11DE6AA-20F5-408E-97A9-512C1626F418} = {DC05A4D2-62AF-4917-9389-8CFE1AC72377}
+		{FC3A81C8-A709-4E36-AE47-E328AD52E15D} = {DC05A4D2-62AF-4917-9389-8CFE1AC72377}
+		{D73D4591-A1C9-4809-A392-2EB26F3C7DCE} = {DC05A4D2-62AF-4917-9389-8CFE1AC72377}
+		{938EB40F-0702-45E0-A575-55F20C0FF444} = {DC05A4D2-62AF-4917-9389-8CFE1AC72377}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {71E72E55-D27E-4899-B978-34F6BF63360D}
+	EndGlobalSection
+EndGlobal
