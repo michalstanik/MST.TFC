@@ -28,6 +28,7 @@ namespace MST.IDP.Admin
         }
 
         public IConfiguration Configuration { get; }
+        public static IRootConfiguration StaticConfig { get; private set; }
 
         public IWebHostEnvironment HostingEnvironment { get; }
 
@@ -35,6 +36,10 @@ namespace MST.IDP.Admin
         {
             var rootConfiguration = CreateRootConfiguration();
             services.AddSingleton(rootConfiguration);
+            
+            //stored rootConfiguration in static property which will be avaliable from staic class and extension methods 
+            StaticConfig = rootConfiguration;
+
 
             // Add DbContexts for Asp.Net Core Identity, Logging and IdentityServer - Configuration store and Operational store
             RegisterDbContexts(services);

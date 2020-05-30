@@ -16,6 +16,8 @@ namespace MST.IDP.Admin.Configuration
         public string ClientId { get; set; } 
         public string ClientSecret { get; set; }
         public string OidcResponseType { get; set; }
+        //Custom
+        public bool DatabaseDropOnSeed { get; set; }
     }
 }
 
