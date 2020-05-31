@@ -21,6 +21,9 @@ namespace MST.IDP.Admin.EntityFramework.Shared.DbContexts
 
         private void ConfigureIdentityContext(ModelBuilder builder)
         {
+            builder.Entity<UserIdentity>().Ignore(c => c.PhoneNumber)
+                                          .Ignore(c => c.PhoneNumberConfirmed);
+
             builder.Entity<UserIdentityRole>().ToTable(TableConsts.IdentityRoles);
             builder.Entity<UserIdentityRoleClaim>().ToTable(TableConsts.IdentityRoleClaims);
             builder.Entity<UserIdentityUserRole>().ToTable(TableConsts.IdentityUserRoles);

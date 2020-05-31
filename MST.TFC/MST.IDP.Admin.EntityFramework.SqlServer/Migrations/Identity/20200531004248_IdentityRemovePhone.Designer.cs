@@ -4,14 +4,16 @@ using MST.IDP.Admin.EntityFramework.Shared.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MST.IDP.Admin.EntityFramework.SqlServer.Migrations.Identity
 {
     [DbContext(typeof(AdminIdentityDbContext))]
-    partial class AdminIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200531004248_IdentityRemovePhone")]
+    partial class IdentityRemovePhone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
