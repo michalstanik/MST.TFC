@@ -28,6 +28,18 @@ namespace MST.IDP.Admin.EntityFramework.Shared.Repositories
             return userResult.ForcedPasswordChange;
         }
 
+        public async Task ResetChangePasswordFlag(string userId)
+        {
+            var userResult = await RetrieveUserById(userId);
+            
+            if (userResult == null)
+            {
+                throw new InvalidOperationException();
+            }
+            userResult.ForcedPasswordChange = false;
+            await _context.SaveChangesAsync();
+        }
+
         private async Task<UserIdentity> RetrieveUserById(string userId)
         {
             return await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();

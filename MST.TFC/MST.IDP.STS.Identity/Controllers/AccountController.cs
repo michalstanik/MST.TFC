@@ -146,6 +146,12 @@ namespace MST.IDP.STS.Identity.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberLogin, lockoutOnFailure: true);
                     if (result.Succeeded)
                     {
+                        if (await _userIdentityRepository.PasswordChangeIsForced(user.Id.ToString()))
+                        {
+                            Debug.WriteLine("Password Should Be Changed");
+                            return RedirectToAction("ChangePassword", "Manage");
+                        }
+
                         await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName));
 
                         if (context != null)

@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using MST.IDP.STS.Identity.Helpers;
 using MST.IDP.STS.Identity.Helpers.Localization;
 using MST.IDP.STS.Identity.ViewModels.Manage;
+using MST.IDP.Admin.EntityFramework.Shared.RepositoriesInterfaces;
 
 namespace MST.IDP.STS.Identity.Controllers
 {    
@@ -27,14 +28,19 @@ namespace MST.IDP.STS.Identity.Controllers
         private readonly ILogger<ManageController<TUser, TKey>> _logger;
         private readonly IGenericControllerLocalizer<ManageController<TUser, TKey>> _localizer;
         private readonly UrlEncoder _urlEncoder;
-
+        private readonly IUserIdentityRepository _userIdentityRepository;
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         [TempData]
         public string StatusMessage { get; set; }
 
-        public ManageController(UserManager<TUser> userManager, SignInManager<TUser> signInManager, IEmailSender emailSender, ILogger<ManageController<TUser, TKey>> logger, IGenericControllerLocalizer<ManageController<TUser, TKey>> localizer, UrlEncoder urlEncoder)
+        public ManageController(UserManager<TUser> userManager
+            , SignInManager<TUser> signInManager
+            , IEmailSender emailSender, ILogger<ManageController<TUser, TKey>> logger
+            , IGenericControllerLocalizer<ManageController<TUser, TKey>> localizer
+            , UrlEncoder urlEncoder
+            , IUserIdentityRepository userIdentityRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -42,6 +48,7 @@ namespace MST.IDP.STS.Identity.Controllers
             _logger = logger;
             _localizer = localizer;
             _urlEncoder = urlEncoder;
+            _userIdentityRepository = userIdentityRepository;
         }
 
         [HttpGet]
@@ -142,6 +149,7 @@ namespace MST.IDP.STS.Identity.Controllers
             }
 
             var model = new ChangePasswordViewModel { StatusMessage = StatusMessage };
+
             return View(model);
         }
 
@@ -169,6 +177,9 @@ namespace MST.IDP.STS.Identity.Controllers
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation(_localizer["PasswordChangedLog", user.UserName]);
+
+            //change forced passwordChange flag
+            await _userIdentityRepository.ResetChangePasswordFlag(user.Id.ToString());
 
             StatusMessage = _localizer["PasswordChanged"];
 
